@@ -146,7 +146,9 @@ export class GatewayBrowserClient {
     if (this.closed) {
       return;
     }
-    const delay = this.backoffMs;
+    // Add jitter (0-30%) to prevent thundering herd on reconnect
+    const jitter = this.backoffMs * (Math.random() * 0.3);
+    const delay = Math.floor(this.backoffMs + jitter);
     this.backoffMs = Math.min(this.backoffMs * 1.7, 15_000);
     window.setTimeout(() => this.connect(), delay);
   }

@@ -268,33 +268,41 @@ img.chat-avatar {
   background: rgba(255, 77, 77, 0.15);
 }
 
-/* Streaming animation */
+/* Streaming animation - smooth gradient shimmer */
 .chat-bubble.streaming {
-  animation: pulsing-border 1.5s ease-out infinite;
+  border-color: var(--border);
+  animation: streaming-glow 2s var(--ease-in-out) infinite;
+  box-shadow: 0 0 0 1px var(--border);
 }
 
-@keyframes pulsing-border {
+@keyframes streaming-glow {
   0%,
   100% {
     border-color: var(--border);
+    box-shadow: 0 0 0 1px transparent;
   }
-  50% {
+  40% {
     border-color: var(--accent);
+    box-shadow: 0 0 12px var(--accent-glow);
+  }
+  60% {
+    border-color: var(--accent);
+    box-shadow: 0 0 12px var(--accent-glow);
   }
 }
 
 /* Fade-in animation for new messages */
 .chat-bubble.fade-in {
-  animation: fade-in 200ms ease-out;
+  animation: bubble-enter 280ms var(--ease-out);
 }
 
-@keyframes fade-in {
+@keyframes bubble-enter {
   from {
     opacity: 0;
-    transform: translateY(4px);
+    transform: translateY(6px) scale(0.98);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }

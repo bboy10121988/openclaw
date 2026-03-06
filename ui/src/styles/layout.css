@@ -364,7 +364,12 @@
   transition:
     border-color var(--duration-fast) ease,
     background var(--duration-fast) ease,
-    color var(--duration-fast) ease;
+    color var(--duration-fast) ease,
+    transform var(--duration-fast) ease;
+}
+
+.nav-item:active {
+  transform: scale(0.97);
 }
 
 .nav-item__icon {

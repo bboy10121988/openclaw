@@ -57,6 +57,8 @@
   min-height: 0; /* Allow shrinking for flex scroll behavior */
   border-radius: 12px;
   background: transparent;
+  overscroll-behavior-y: contain;
+  scrollbar-width: thin;
 }
 
 /* Focus mode exit button */
@@ -125,6 +127,12 @@
 .chat-new-messages:hover {
   background: var(--panel);
   border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.chat-new-messages:active {
+  transform: translateY(0);
 }
 
 .chat-new-messages svg {
@@ -148,7 +156,7 @@
   gap: 12px;
   margin-top: auto; /* Push to bottom of flex container */
   padding: 12px 4px 4px;
-  background: linear-gradient(to bottom, transparent, var(--bg) 20%);
+  background: linear-gradient(to bottom, transparent 0%, var(--bg) 24%);
   z-index: 10;
 }
 
@@ -297,6 +305,14 @@
   font-family: var(--font-body);
   font-size: 14px;
   line-height: 1.45;
+  transition:
+    border-color var(--duration-fast) ease,
+    box-shadow var(--duration-fast) ease;
+}
+
+.chat-compose .chat-compose__field textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-glow);
 }
 
 .chat-compose__field textarea:disabled {
@@ -320,6 +336,15 @@
   line-height: 1;
   white-space: nowrap;
   box-sizing: border-box;
+  transition:
+    background var(--duration-fast) ease,
+    border-color var(--duration-fast) ease,
+    transform var(--duration-fast) ease,
+    box-shadow var(--duration-fast) ease;
+}
+
+.chat-compose .chat-compose__actions .btn:active:not(:disabled) {
+  transform: scale(0.96);
 }
 
 /* Chat controls - moved to content-header area, left aligned */
@@ -370,20 +395,6 @@
 .btn--icon:hover {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.2);
-}
-
-/* Light theme icon button overrides */
-:root[data-theme="light"] .btn--icon {
-  background: #ffffff;
-  border-color: var(--border);
-  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
-  color: var(--muted);
-}
-
-:root[data-theme="light"] .btn--icon:hover {
-  background: #ffffff;
-  border-color: var(--border-strong);
-  color: var(--text);
 }
 
 /* Light theme icon button overrides */
